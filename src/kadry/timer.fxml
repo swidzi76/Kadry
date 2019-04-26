@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kadry.ControllerTimer">
+   <children>
+      <MenuBar>
+         <menus>
+            <Menu mnemonicParsing="false" text="Ustawienia">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#buttonSettingsClicked" text="Ustawienia podstawowe" />
+                  <MenuItem mnemonicParsing="false" onAction="#buttonDefaultSettingsClicked" text="Ustawienia domyślne" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="O programie">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</VBox>
