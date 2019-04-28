@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kadry.ControllerTimer">
+<VBox fx:id="vBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="757.0" prefWidth="1117.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kadry.ControllerTimer">
    <children>
       <MenuBar>
          <menus>
@@ -23,5 +26,16 @@
             </Menu>
          </menus>
       </MenuBar>
+      <ImageView fx:id="backgroundImage" fitHeight="339.0" fitWidth="1189.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+         <image>
+            <Image url="@../resources/logoDrobud.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <VBox.margin>
+            <Insets top="200.0" />
+         </VBox.margin>
+      </ImageView>
    </children>
 </VBox>
