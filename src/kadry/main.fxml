@@ -9,14 +9,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="vBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="757.0" prefWidth="1117.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kadry.ControllerTimer">
+<VBox fx:id="vBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="757.0" prefWidth="1117.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kadry.ControllerMain">
    <children>
       <MenuBar>
          <menus>
-            <Menu mnemonicParsing="false" text="Ustawienia">
+            <Menu mnemonicParsing="false" text="Kadry i płace">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#buttonSettingsClicked" text="Ustawienia podstawowe" />
-                  <MenuItem mnemonicParsing="false" onAction="#buttonDefaultSettingsClicked" text="Ustawienia domyślne" />
+                  <MenuItem mnemonicParsing="false" onAction="#buttonKadryClicked" text="Kadry" />
+                <MenuItem mnemonicParsing="false" text="Ustawienia podstawowe" />
+                  <MenuItem mnemonicParsing="false" text="Ustawienia domyślne" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="O programie">
