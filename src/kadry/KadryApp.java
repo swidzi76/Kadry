@@ -32,7 +32,6 @@ public class KadryApp extends Application {
         ControllerMain controller = loader.getController();
 
 
-
         Scene scene = new Scene(vBox);
         primaryStage.setScene(scene);
 

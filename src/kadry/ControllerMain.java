@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -30,7 +31,7 @@ public class ControllerMain {
     public VBox vBox;
 
     final static public String TITLE = "Kadry i Płace";
-    final static public String VER = "0.1";
+    final static public String VER = "0.2";
     final static public String SETTINGS_FILE = "settings.txt";
 
     final static public String COLOR_BLACK = "#000000";
@@ -55,12 +56,33 @@ public class ControllerMain {
 
         ControllerKadry controllerKadry = loader.getController();
         controllerKadry.setMainWindow(this);
+        controllerKadry.setTable();
         Scene scene = new Scene(vBox);
         Stage stage = new Stage();
         stage.setScene(scene);
 
         stage.setTitle("Kadry ");
         //stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+
+    }
+
+    @FXML
+    void buttonOprogramieClicked(ActionEvent event) throws Exception{
+        // stworzenia okienka z nazwa firmy i wersją programu
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("oProgramie.fxml"));
+        VBox vBox = (VBox) loader.load();
+
+        ControllerOprogramie controllerOprogramie = loader.getController();
+        controllerOprogramie.setMainWindow(this);
+        controllerOprogramie.setVersion();
+        Scene scene = new Scene(vBox);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+
+        stage.setTitle("O programie ");
+        stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
 

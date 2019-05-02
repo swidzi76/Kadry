@@ -1,9 +1,19 @@
 package kadry;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import kadryTools.Employee;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -11,18 +21,83 @@ import java.time.LocalTime;
 public class ControllerKadry {
 
     private ControllerMain rootWindow;
-    public TableView<String> tableKadry;
-
+    public TableView tableKadry = new TableView();
+    private final ObservableList<Employee> data = FXCollections.observableArrayList();
     public void setMainWindow(ControllerMain rootWindow){
         this.rootWindow = rootWindow;
     }
 
     public ControllerKadry() {
-//        tableKadry.getColumns().get(0).setId("Nazwisko");
-  //      tableKadry.getColumns().get(1).setId("Imię / imiona");
+
+    }
+    public void setTable() {
+        tableKadry.getColumns().clear();
+        TableColumn nazwiskoCol = new TableColumn("Nazwisko");
+        nazwiskoCol.setCellValueFactory( new PropertyValueFactory<Employee, String>("nazwisko"));
+        nazwiskoCol.setMinWidth(200);
+
+        TableColumn imionaCol = new TableColumn("Imie");
+        imionaCol.setCellValueFactory( new PropertyValueFactory<Employee, String>("imiona"));
+        imionaCol.setMinWidth(200);
+
+        TableColumn nrAkt = new TableColumn("Numer Akt");
+        nrAkt.setCellValueFactory( new PropertyValueFactory<Employee, String>("nrAkt"));
+        nrAkt.setMinWidth(100);
+
+        TableColumn nrEwidencyjny = new TableColumn("Numer Ewidencyjny");
+        nrEwidencyjny.setCellValueFactory( new PropertyValueFactory<Employee, Integer>("nrEwidencyjny"));
+        nrEwidencyjny.setMinWidth(50);
+
+        TableColumn kodUmowyOprace = new TableColumn("Kod umowy o pracę");
+        kodUmowyOprace.setCellValueFactory( new PropertyValueFactory<Employee, String>("kodUmowyOprace"));
+        kodUmowyOprace.setMinWidth(50);
+
+        loadData();
+        tableKadry.setItems(data);
+        tableKadry.getColumns().addAll(nazwiskoCol, imionaCol, nrAkt, nrEwidencyjny, kodUmowyOprace);
+
+        // ustawienie obsługi podwójnego kliknięcia
+        tableKadry.setOnMouseClicked( event -> {
+            if( event.getClickCount() == 2){
+                try {
+                    tableKadryDubleClicked();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //System.out.println(tableKadry.getSelectionModel().getSelectedItem());
+            }
+        });
+
+    }
+    private void tableKadryDubleClicked() throws Exception{
+        // pokazujemy okienko z danymi danego pracownika
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("employee.fxml"));
+        VBox vBox = (VBox) loader.load();
+
+
+        ControllerEmployee controllerEmployee = loader.getController();
+        controllerEmployee.setMainWindow(this);
+
+        Scene scene = new Scene(vBox);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+
+        stage.setTitle(" Dane pracownika ");
+        controllerEmployee.setEmployee((Employee) tableKadry.getSelectionModel().getSelectedItem());
+        controllerEmployee.setFields();
+        //stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
 
     }
 
+    private void loadData(){
+        data.addAll( new Employee("Kowalski", "Adam", "2/2019"),
+                new Employee("Nowak", "Robert", "23/2008"),
+                new Employee("Kowalski", "Marian", "45/1997"),
+                new Employee("Świdzicki", "Jarosław", "34/2007"),
+                new Employee("Roman", "Artur", "434/1994"));
+    }
     //    public void setComboBoxes(){
 //        // ustawienie wartości
 //        String[] tableHours =  new String[24];

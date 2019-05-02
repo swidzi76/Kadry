@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kadry.ControllerEmployee">
+   <children>
+      <Label fx:id="labelNazwisko" alignment="TOP_LEFT" text="Nazwisko i imię">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
+      </Label>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab id="tabDanePodstawowe" fx:id="tabDanePodstawowe" text="Dane podstawowe">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="8.0" prefWidth="800.0" spacing="20.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Label text="Nazwisko">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="employeeNazwisko" />
+                              <Label text="Imię / Imiona">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="employeeImie" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="800.0" spacing="20.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Label text="Numer akt">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="employeeNrAkt" />
+                              <Label text="PESEL">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="employeePesel" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content></Tab>
+          <Tab id="tabDaneUzupelniajace" fx:id="tabDaneUzupelniajace" text="Dane uzupełniające">
+               <content>
+                  <VBox prefHeight="215.0" prefWidth="800.0">
+                     <children>
+                        <HBox prefHeight="8.0" prefWidth="800.0" spacing="20.0">
+                           <children>
+                              <Label text="Kod umowy o pracę">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="employeeKodUmowyOprace" />
+                              <Label prefHeight="63.0" prefWidth="167.0" text="Termin upływu umowy" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="employeeTerminUplywuUmowy" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content></Tab>
+        </tabs>
+      </TabPane>
+      <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="800.0" spacing="20.0" VBox.vgrow="NEVER">
+         <children>
+            <Button fx:id="employeeZapisz" mnemonicParsing="false" onAction="#employeeButtonZapisz" text="Zapisz i zamknij">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="employeeZamknij" layoutX="325.0" layoutY="20.0" mnemonicParsing="false" onAction="#employeeButtonZamknij" text="Zamknij">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

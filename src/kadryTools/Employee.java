@@ -1,5 +1,7 @@
 package kadryTools;
 
+import javafx.util.StringConverter;
+
 import java.time.LocalDate;
 
 public class Employee extends Person {
@@ -16,9 +18,10 @@ public class Employee extends Person {
     String etat;
     String grupaPracownicza;
 
-    public Employee(String nazwisko, String imiona) {
+    public Employee(String nazwisko, String imiona, String nrAkt) {
         super(nazwisko, imiona);
-        nrEwidencyjny = nr++;
+        this.nrAkt = nrAkt;
+        this.nrEwidencyjny = nr++;
     }
 
     @Override
@@ -61,9 +64,9 @@ public class Employee extends Person {
         return nrEwidencyjny;
     }
 
-    public void setNrEwidencyjny(int nrEwidencyjny) {
-        this.nrEwidencyjny = nrEwidencyjny;
-    }
+//    public void setNrEwidencyjny(int nrEwidencyjny) {
+//        this.nrEwidencyjny = nrEwidencyjny;
+//    }
 
     public String getNrAkt() {
         return nrAkt;
