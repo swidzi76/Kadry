@@ -3,26 +3,33 @@ package kadry;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import kadryTools.DataToFile;
 import kadryTools.Employee;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class ControllerKadry {
 
     private ControllerMain rootWindow;
     public TableView tableKadry = new TableView();
-    private final ObservableList<Employee> data = FXCollections.observableArrayList();
+    public final ObservableList<Employee> data = FXCollections.observableArrayList();
+    private final String FILE_OF_DATA = "dane.swd";
     public void setMainWindow(ControllerMain rootWindow){
         this.rootWindow = rootWindow;
     }
@@ -92,11 +99,63 @@ public class ControllerKadry {
     }
 
     private void loadData(){
+        File file = new File(this.FILE_OF_DATA);
+        if(!file.exists()){
+            loadDefaultData();
+            saveDataToFile();
+        }
+
+        loadDataFromFile();
+
+    }
+    public void saveDataToFile(){
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream(new File(FILE_OF_DATA));
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            ArrayList<Employee> temp1= new ArrayList<>();
+            for (int i = 0; i < data.size(); i++) {
+                temp1.add(data.get(i));
+            }
+            DataToFile temp = new DataToFile(temp1);
+            objectOut.writeObject(temp);
+            objectOut.close();
+            fileOut.close();
+//            System.out.println("The Object  was succesfully written to a file");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    private void loadDataFromFile(){
+        try {
+            FileInputStream fileIntput = new FileInputStream(new File(FILE_OF_DATA));
+            ObjectInputStream objectInt = new ObjectInputStream(fileIntput);
+
+            ArrayList<Employee> temp1 = new ArrayList();
+            DataToFile temp = (DataToFile) objectInt.readObject();
+            objectInt.close();
+            fileIntput.close();
+
+            data.clear();
+            temp1 = temp.get();
+            for (int i = 0; i < temp1.size() ; i++) {
+                data.add(temp1.get(i));
+            }
+//            System.out.println("The Object  was succesfully written to a file");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+    private void loadDefaultData(){
         data.addAll( new Employee("Kowalski", "Adam", "2/2019"),
                 new Employee("Nowak", "Robert", "23/2008"),
                 new Employee("Kowalski", "Marian", "45/1997"),
                 new Employee("Świdzicki", "Jarosław", "34/2007"),
                 new Employee("Roman", "Artur", "434/1994"));
+
     }
     //    public void setComboBoxes(){
 //        // ustawienie wartości
@@ -141,7 +200,29 @@ public class ControllerKadry {
 //        comboBox3pSec.setValue(String.valueOf(rootWindow.localTimeThirdBreak.getSecond()));
 //
 //    }
+
+    @FXML
+    void buttonUsunClicked(ActionEvent event) {
+        Employee e = (Employee) tableKadry.getSelectionModel().getSelectedItem();
+        data.remove(e);
+    }
+    @FXML
+    void buttonDodajClicked(ActionEvent event) {
+        Employee prac = new Employee(data.size());
+        data.add(prac);
+        tableKadry.getSelectionModel().select(prac);
+        try {
+            tableKadryDubleClicked();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void buttonOkClicked(ActionEvent event) throws IOException {
+
+        //zapisz dane w pliku
+        saveDataToFile();
 //        rootWindow.localTimeEnd = LocalTime.of(Integer.valueOf(comboBoxEndHour.getValue()),
 //                Integer.valueOf(comboBoxEndMin.getValue()),
 //                Integer.valueOf(comboBoxEndSec.getValue()));

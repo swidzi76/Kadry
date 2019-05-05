@@ -1,8 +1,9 @@
 package kadryTools;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Person {
+public class Person implements Serializable {
     String nazwisko;
     String imiona;
     String imieOjca;
@@ -30,6 +31,9 @@ public class Person {
         this.nazwisko = nazwisko;
         this.imiona = imiona;
     }
+    public Person(){
+
+    };
 
     public String getNazwisko() {
         return nazwisko;

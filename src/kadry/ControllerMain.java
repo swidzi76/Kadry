@@ -1,6 +1,8 @@
 package kadry;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -56,7 +59,8 @@ public class ControllerMain {
 
         ControllerKadry controllerKadry = loader.getController();
         controllerKadry.setMainWindow(this);
-        controllerKadry.setTable();
+
+        controllerKadry.setTable(); // ustawienien TABLICY i wczytanie danych
         Scene scene = new Scene(vBox);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -66,6 +70,13 @@ public class ControllerMain {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
 
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                // sprawdzenie czy zapisać
+                controllerKadry.saveDataToFile();
+            }
+        });
     }
 
     @FXML

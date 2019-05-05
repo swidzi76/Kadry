@@ -2,10 +2,11 @@ package kadryTools;
 
 import javafx.util.StringConverter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Employee extends Person {
-    static int nr = 0;
+public class Employee extends Person implements Serializable {
+    public static int nr = 0;
     int nrEwidencyjny;
     String nrAkt;
     String kodUmowyOprace;
@@ -17,7 +18,12 @@ public class Employee extends Person {
     String nazwaDzialu;
     String etat;
     String grupaPracownicza;
-
+    public Employee(){
+        this.nrEwidencyjny = nr++;
+    };
+    public Employee(int nrEwidencyjny){
+        this.nrEwidencyjny = nrEwidencyjny;
+    }
     public Employee(String nazwisko, String imiona, String nrAkt) {
         super(nazwisko, imiona);
         this.nrAkt = nrAkt;

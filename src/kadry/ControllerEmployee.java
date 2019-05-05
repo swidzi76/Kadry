@@ -69,6 +69,9 @@ public class ControllerEmployee {
     }
     @FXML
     void employeeButtonZamknij(ActionEvent event) {
+        if(pracownik.getNazwisko() == null && pracownik.getImiona() == null){
+            rootWindow.data.remove(pracownik);
+        }
         ((Button)event.getSource()).getScene().getWindow().hide();
 
     }
